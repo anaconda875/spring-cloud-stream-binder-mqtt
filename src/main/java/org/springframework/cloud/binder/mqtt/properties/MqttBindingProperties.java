@@ -11,6 +11,7 @@ import org.springframework.cloud.stream.binder.BinderSpecificPropertiesProvider;
 @Data
 public class MqttBindingProperties implements BinderSpecificPropertiesProvider {
 
-  private MqttSourceProperties consumer = new MqttSourceProperties();
-  private MqttSinkProperties producer = new MqttSinkProperties();
+    private MqttSourceProperties consumer = new MqttSourceProperties();
+    private MqttSinkProperties producer = new MqttSinkProperties();
+
 }

@@ -17,11 +17,11 @@ import org.springframework.validation.annotation.Validated;
 @ConfigurationProperties(prefix = "spring.cloud.stream.mqtt.binder")
 public class MqttBinderConfigurationProperties {
 
-  private String username = "guest";
+    private String username = "guest";
 
-  private String password = "guest";
+    private String password = "guest";
 
-  private String serverHost = "localhost";
+    private String serverHost = "localhost";
 
-  private Integer serverPort = 1883;
+    private Integer serverPort = 1883;
 }

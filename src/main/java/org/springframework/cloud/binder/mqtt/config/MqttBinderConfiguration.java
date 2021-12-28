@@ -19,24 +19,24 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConditionalOnMissingBean(Binder.class)
 @EnableConfigurationProperties({
-  MqttExtendedBindingProperties.class,
-  MqttBinderConfigurationProperties.class
+        MqttExtendedBindingProperties.class,
+        MqttBinderConfigurationProperties.class
 })
 @RequiredArgsConstructor
 public class MqttBinderConfiguration {
 
-  private final MqttExtendedBindingProperties mqttExtendedBindingProperties;
+    private final MqttExtendedBindingProperties mqttExtendedBindingProperties;
 
-  @Bean
-  public MqttProvisioningProvider provisioningProvider() {
-    return new MqttProvisioningProvider();
-  }
+    @Bean
+    public MqttProvisioningProvider provisioningProvider() {
+        return new MqttProvisioningProvider();
+    }
 
-  @Bean
-  public MqttBinder mqttBinder(
-      MqttProvisioningProvider provisioningProvider,
-      MqttBinderConfigurationProperties mqttProperties) {
+    @Bean
+    public MqttBinder mqttBinder(
+            MqttProvisioningProvider provisioningProvider,
+            MqttBinderConfigurationProperties mqttProperties) {
 
-    return new MqttBinder(provisioningProvider, mqttExtendedBindingProperties, mqttProperties);
-  }
+        return new MqttBinder(provisioningProvider, mqttExtendedBindingProperties, mqttProperties);
+    }
 }

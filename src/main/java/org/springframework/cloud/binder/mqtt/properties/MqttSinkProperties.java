@@ -2,6 +2,7 @@ package org.springframework.cloud.binder.mqtt.properties;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
 import lombok.Data;
 import org.springframework.validation.annotation.Validated;
 
@@ -14,10 +15,10 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 public class MqttSinkProperties {
 
-  /**
-   * identifies the client
-   */
-  @NotBlank
-  @Size(min = 1, max = 23)
-  private String clientId = "stream.client.id.sink";
+    /**
+     * identifies the client
+     */
+    @NotBlank
+    @Size(min = 1, max = 23)
+    private String clientId = "stream.client.id.sink";
 }

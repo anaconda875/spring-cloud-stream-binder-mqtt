@@ -20,69 +20,69 @@ import org.springframework.messaging.MessageHandler;
  * @author Bao Ngo
  */
 public class MqttBinder
-    extends AbstractMessageChannelBinder<
+        extends AbstractMessageChannelBinder<
         ExtendedConsumerProperties<MqttSourceProperties>,
         ExtendedProducerProperties<MqttSinkProperties>,
         MqttProvisioningProvider>
-    implements ExtendedPropertiesBinder<MessageChannel, MqttSourceProperties, MqttSinkProperties> {
+        implements ExtendedPropertiesBinder<MessageChannel, MqttSourceProperties, MqttSinkProperties> {
 
-  private MqttExtendedBindingProperties extendedBindingProperties;
-  private MqttBinderConfigurationProperties binderConfigurationProperties;
+    private MqttExtendedBindingProperties extendedBindingProperties;
+    private MqttBinderConfigurationProperties binderConfigurationProperties;
 
-  public MqttBinder(
-      MqttProvisioningProvider provisioningProvider,
-      MqttExtendedBindingProperties extendedBindingProperties,
-      MqttBinderConfigurationProperties binderConfigurationProperties) {
-    super(BinderHeaders.STANDARD_HEADERS, provisioningProvider);
-    this.extendedBindingProperties = extendedBindingProperties;
-    this.binderConfigurationProperties = binderConfigurationProperties;
-  }
+    public MqttBinder(
+            MqttProvisioningProvider provisioningProvider,
+            MqttExtendedBindingProperties extendedBindingProperties,
+            MqttBinderConfigurationProperties binderConfigurationProperties) {
+        super(BinderHeaders.STANDARD_HEADERS, provisioningProvider);
+        this.extendedBindingProperties = extendedBindingProperties;
+        this.binderConfigurationProperties = binderConfigurationProperties;
+    }
 
-  @Override
-  protected MessageHandler createProducerMessageHandler(
-      ProducerDestination destination,
-      ExtendedProducerProperties<MqttSinkProperties> producerProperties,
-      MessageChannel errorChannel) {
+    @Override
+    protected MessageHandler createProducerMessageHandler(
+            ProducerDestination destination,
+            ExtendedProducerProperties<MqttSinkProperties> producerProperties,
+            MessageChannel errorChannel) {
 
-    MqttSinkProperties sinkProperties = producerProperties.getExtension();
-    MqttV5MessageHandler handler =
-        new MqttV5MessageHandler(
-            binderConfigurationProperties, sinkProperties.getClientId(), destination.getName());
+        MqttSinkProperties sinkProperties = producerProperties.getExtension();
+        MqttV5MessageHandler handler =
+                new MqttV5MessageHandler(
+                        binderConfigurationProperties, sinkProperties.getClientId(), destination.getName());
 
-    return handler;
-  }
+        return handler;
+    }
 
-  @Override
-  protected MessageProducer createConsumerEndpoint(
-      ConsumerDestination destination,
-      String group,
-      ExtendedConsumerProperties<MqttSourceProperties> properties) {
+    @Override
+    protected MessageProducer createConsumerEndpoint(
+            ConsumerDestination destination,
+            String group,
+            ExtendedConsumerProperties<MqttSourceProperties> properties) {
 
-    MqttSourceProperties sourceProperties = properties.getExtension();
-    MqttV5MessageDrivenChannelAdapter adapter =
-        new MqttV5MessageDrivenChannelAdapter(
-            binderConfigurationProperties, sourceProperties.getClientId(), destination.getName());
+        MqttSourceProperties sourceProperties = properties.getExtension();
+        MqttV5MessageDrivenChannelAdapter adapter =
+                new MqttV5MessageDrivenChannelAdapter(
+                        binderConfigurationProperties, sourceProperties.getClientId(), destination.getName());
 
-    return adapter;
-  }
+        return adapter;
+    }
 
-  @Override
-  public MqttSourceProperties getExtendedConsumerProperties(String channelName) {
-    return this.extendedBindingProperties.getExtendedConsumerProperties(channelName);
-  }
+    @Override
+    public MqttSourceProperties getExtendedConsumerProperties(String channelName) {
+        return this.extendedBindingProperties.getExtendedConsumerProperties(channelName);
+    }
 
-  @Override
-  public MqttSinkProperties getExtendedProducerProperties(String channelName) {
-    return this.extendedBindingProperties.getExtendedProducerProperties(channelName);
-  }
+    @Override
+    public MqttSinkProperties getExtendedProducerProperties(String channelName) {
+        return this.extendedBindingProperties.getExtendedProducerProperties(channelName);
+    }
 
-  @Override
-  public String getDefaultsPrefix() {
-    return this.extendedBindingProperties.getDefaultsPrefix();
-  }
+    @Override
+    public String getDefaultsPrefix() {
+        return this.extendedBindingProperties.getDefaultsPrefix();
+    }
 
-  @Override
-  public Class<? extends BinderSpecificPropertiesProvider> getExtendedPropertiesEntryClass() {
-    return this.extendedBindingProperties.getExtendedPropertiesEntryClass();
-  }
+    @Override
+    public Class<? extends BinderSpecificPropertiesProvider> getExtendedPropertiesEntryClass() {
+        return this.extendedBindingProperties.getExtendedPropertiesEntryClass();
+    }
 }
