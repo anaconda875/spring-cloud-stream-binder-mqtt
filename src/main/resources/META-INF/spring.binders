@@ -1,0 +1,2 @@
+mqtt:\
+org.springframework.cloud.binder.mqtt.config.MqttBinderConfiguration
