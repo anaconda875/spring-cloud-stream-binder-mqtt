@@ -5,12 +5,12 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.stream.binder.AbstractExtendedBindingProperties;
 import org.springframework.cloud.stream.binder.BinderSpecificPropertiesProvider;
 
-@ConfigurationProperties("spring.cloud.stream.mqtt")
-public class MqttExtendedBindingProperties
+@ConfigurationProperties("application.cloud.stream.mqtt")
+public class RuntimeMqttExtendedBindingProperties
     extends AbstractExtendedBindingProperties<
         MqttSourceProperties, MqttSinkProperties, MqttBindingProperties> {
 
-  private static final String DEFAULTS_PREFIX = "spring.cloud.stream.mqtt.default";
+  private static final String DEFAULTS_PREFIX = "application.cloud.stream.mqtt.default";
 
   @Override
   public String getDefaultsPrefix() {
